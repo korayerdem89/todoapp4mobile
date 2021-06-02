@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
@@ -5,7 +6,7 @@ export default StyleSheet.create({
     backgroundColor: '#37464e',
     margin: 8,
     borderRadius: 5,
-    paddingHorizontal:8,
+    paddingHorizontal: 8,
     alignItems: 'center',
   },
   textInput: {
@@ -13,7 +14,7 @@ export default StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: 'gray',
     marginBottom: 10,
-    width:'100%',
+    width: '100%',
   },
   button: {
     display: 'flex',
@@ -21,11 +22,10 @@ export default StyleSheet.create({
     justifyContent: 'center',
     borderWidth: 1,
     width: '94%',
-    borderRadius:8,
-    height:30,
-    backgroundColor:'gray',
-    marginBottom:10
- 
+    borderRadius: 8,
+    height: 30,
+    backgroundColor: 'gray',
+    marginBottom: 10,
   },
   buttonTitle: {color: 'white'},
 });
