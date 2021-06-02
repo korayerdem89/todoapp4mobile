@@ -18,6 +18,11 @@ const App = () => {
     setTaskItems([...taskItems, task]);
     setTask(null);
   }
+ const completeTask = (index) => {
+   let itemsCopy=[...taskItems];
+   itemsCopy.splice(index,1);
+   setTaskItems(itemsCopy);
+ }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -28,7 +33,11 @@ const App = () => {
         </View>
         <View>
           { taskItems.map((item, index) => {
-            return <Task key={index} text={item} />
+            return (
+              <TouchableOpacity  onLongPress ={() => completeTask()}>
+                <Task key={index} text={item} />
+              </TouchableOpacity>
+            ) 
           }
           )}
 
