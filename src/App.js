@@ -13,16 +13,24 @@ import Task from './components/Task';
 const App = () => {
   const [task, setTask] = useState();
   const [taskItems, setTaskItems] = useState([]);
+  const [activeBtn, setActiveBtn] = useState('gray');
+  const confirmHandler = () => {
+    setActiveBtn('orange');
+  };
+  const endHandler = () => {
+    setActiveBtn('gray');
+
+  };
 
   function handleAddTask() {
     setTaskItems([...taskItems, task]);
     setTask(null);
   }
- const completeTask = (index) => {
-   let itemsCopy=[...taskItems];
-   itemsCopy.splice(index,1);
-   setTaskItems(itemsCopy);
- }
+  const completeTask = index => {
+    let itemsCopy = [...taskItems];
+    itemsCopy.splice(index, 1);
+    setTaskItems(itemsCopy);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -32,30 +40,28 @@ const App = () => {
           <Text style={styles.headerText}>12312</Text>
         </View>
         <View>
-          { taskItems.map((item, index) => {
+          {taskItems.map((item, index) => {
             return (
-              <TouchableOpacity  onLongPress ={() => completeTask()}>
+              <TouchableOpacity onLongPress={() => completeTask()}>
                 <Task key={index} text={item} />
               </TouchableOpacity>
-            ) 
-          }
-          )}
-
+            );
+          })}
         </View>
       </View>
       <View style={styles.task_container}>
         <View style={styles.inputBox}>
           <TextInput
+            key={id}
             placeholder="Ara..."
             style={styles.textInput}
             placeholderTextColor="gray"
             value={task}
-            onChangeText={text => setTask(text)}
+            onChangeText={text => [setTask(text), confirmHandler()]}
           />
           <TouchableOpacity
-            disabled={false}
-            style={styles.button}
-            onPress={() => handleAddTask()}>
+            style={[styles.button, {backgroundColor: activeBtn}]}
+            onPress={() => [handleAddTask(), endHandler()]}>
             <Text style={styles.buttonTitle}>Kaydet</Text>
           </TouchableOpacity>
         </View>
@@ -111,8 +117,8 @@ const styles = StyleSheet.create({
     width: '94%',
     borderRadius: 8,
     height: 30,
-    backgroundColor: 'gray',
     marginBottom: 10,
+    backgroundColor: 'orange',
   },
   buttonTitle: {color: 'white'},
 });
