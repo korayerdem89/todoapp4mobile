@@ -9,7 +9,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Task from './components/Task';
-import TaskStyle from './components/Task.style';
 
 const App = () => {
   const [task, setTask] = useState();
@@ -31,11 +30,8 @@ const App = () => {
   };
 
   function handleAddTask() {
-    if (task.length>0){
     setTaskItems([...taskItems, task]);
-    setTask(null);} else {
-      alert('text here');
-    }
+    setTask(null);
   }
   const completeTask = index => {
     let itemsCopy = [...taskItems];
@@ -55,7 +51,7 @@ const App = () => {
             return (
               <TouchableOpacity
                 onLongPress={() => [completeTask(), decreaseCounter()]}>
-               <Task key={index} text={item} />
+                <Task key={index} text={item} />
               </TouchableOpacity>
             );
           })}
@@ -64,7 +60,6 @@ const App = () => {
       <View style={styles.task_container}>
         <View style={styles.inputBox}>
           <TextInput
-            
             placeholder="Ara..."
             style={styles.textInput}
             placeholderTextColor="gray"
