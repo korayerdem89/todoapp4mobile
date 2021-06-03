@@ -14,12 +14,19 @@ const App = () => {
   const [task, setTask] = useState();
   const [taskItems, setTaskItems] = useState([]);
   const [activeBtn, setActiveBtn] = useState('gray');
+  const [counter, setCounter] = useState(0);
+ 
+  function increaseCounter() {
+    setCounter(counter+1);
+  }
+  function decreaseCounter() {
+    setCounter(counter-1);
+  }
   const confirmHandler = () => {
     setActiveBtn('orange');
   };
   const endHandler = () => {
     setActiveBtn('gray');
-
   };
 
   function handleAddTask() {
@@ -37,12 +44,12 @@ const App = () => {
       <View style={styles.top_side}>
         <View style={styles.header}>
           <Text style={styles.headerText}>Yapılacaklar</Text>
-          <Text style={styles.headerText}>12312</Text>
+          <Text style={styles.headerText}>{counter}</Text>
         </View>
         <View>
           {taskItems.map((item, index) => {
             return (
-              <TouchableOpacity onLongPress={() => completeTask()}>
+              <TouchableOpacity onLongPress={() => [completeTask(), decreaseCounter()]}>
                 <Task key={index} text={item} />
               </TouchableOpacity>
             );
@@ -52,7 +59,6 @@ const App = () => {
       <View style={styles.task_container}>
         <View style={styles.inputBox}>
           <TextInput
-            key={id}
             placeholder="Ara..."
             style={styles.textInput}
             placeholderTextColor="gray"
@@ -61,7 +67,7 @@ const App = () => {
           />
           <TouchableOpacity
             style={[styles.button, {backgroundColor: activeBtn}]}
-            onPress={() => [handleAddTask(), endHandler()]}>
+            onPress={() => [handleAddTask(), endHandler(), increaseCounter()]}>
             <Text style={styles.buttonTitle}>Kaydet</Text>
           </TouchableOpacity>
         </View>
