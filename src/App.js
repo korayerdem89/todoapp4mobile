@@ -9,18 +9,19 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Task from './components/Task';
+import TaskStyle from './components/Task.style';
 
 const App = () => {
   const [task, setTask] = useState();
   const [taskItems, setTaskItems] = useState([]);
   const [activeBtn, setActiveBtn] = useState('gray');
   const [counter, setCounter] = useState(0);
- 
+
   function increaseCounter() {
-    setCounter(counter+1);
+    setCounter(counter + 1);
   }
   function decreaseCounter() {
-    setCounter(counter-1);
+    setCounter(counter - 1);
   }
   const confirmHandler = () => {
     setActiveBtn('orange');
@@ -30,8 +31,11 @@ const App = () => {
   };
 
   function handleAddTask() {
+    if (task.length>0){
     setTaskItems([...taskItems, task]);
-    setTask(null);
+    setTask(null);} else {
+      alert('text here');
+    }
   }
   const completeTask = index => {
     let itemsCopy = [...taskItems];
@@ -49,8 +53,9 @@ const App = () => {
         <View>
           {taskItems.map((item, index) => {
             return (
-              <TouchableOpacity onLongPress={() => [completeTask(), decreaseCounter()]}>
-                <Task key={index} text={item} />
+              <TouchableOpacity
+                onLongPress={() => [completeTask(), decreaseCounter()]}>
+               <Task key={index} text={item} />
               </TouchableOpacity>
             );
           })}
@@ -59,6 +64,7 @@ const App = () => {
       <View style={styles.task_container}>
         <View style={styles.inputBox}>
           <TextInput
+            
             placeholder="Ara..."
             style={styles.textInput}
             placeholderTextColor="gray"
